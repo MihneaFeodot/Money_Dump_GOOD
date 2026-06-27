@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: moneydump
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MD_MAX_USERS
+        value: "2"
+      # Optional: require a code to create an account on a public URL.
+      # - key: MD_REGISTER_CODE
+      #   value: "schimba-ma"
+      # For data that survives redeploys, attach a disk and point MD_DB at it:
+      # - key: MD_DB
+      #   value: "/data/moneydump.db"
